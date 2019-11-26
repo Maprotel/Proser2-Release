@@ -15,8 +15,8 @@
 
   window.__env.callcenterName = "DRC -Los Dos Caminos";
   window.__env.callcenterSlogan = "Convertimos la Atención al Cliente en experiencias satisfactorias";
+  window.__env.callcenterSite = "https://www.inversionesdrc.com/";
   window.__env.callcenterLogo = externalAssets + "/img/logos_client/client-logo.png";
-  window.__env.callcenterSite = "https://www.maprotel.com/";
 
   // Projects
   window.__env.auditLink = host + '/proser_reports/dist/audit/'

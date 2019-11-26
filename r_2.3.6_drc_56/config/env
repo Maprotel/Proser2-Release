@@ -4,9 +4,9 @@ NODE_ENV='development'
 
 # CALLCENTER SUBTITLES
 CALLCENTER_NAME=ProSer Reports
-CALLCENTER_SLOGAN=Servicio médicos de excelencia
+CALLCENTER_SLOGAN=Inversiones DRC
 CALLCENTER_LOGO=/assets/img/logos_client/client-logo.png
-CALLCENTER_SITE=http://www.hmoservisalud.com/HMO-Servisalud/
+CALLCENTER_SITE=https://www.inversionesdrc.com/
 # ------------------------------------------------------------------------
 
 # PORT

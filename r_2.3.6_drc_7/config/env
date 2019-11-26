@@ -4,9 +4,9 @@ NODE_ENV='development'
 
 # CALLCENTER SUBTITLES
 CALLCENTER_NAME=ProSer Reports
-CALLCENTER_SLOGAN=Servicio médicos de excelencia
+CALLCENTER_SLOGAN=Inversiones DRC
 CALLCENTER_LOGO=/assets/img/logos_client/client-logo.png
-CALLCENTER_SITE=http://www.hmoservisalud.com/HMO-Servisalud/
+CALLCENTER_SITE=https://www.inversionesdrc.com/
 # ------------------------------------------------------------------------
 
 # PORT
@@ -41,7 +41,7 @@ ORIGIN_DB_HOST=10.10.4.8
 ORIGIN_DB_USER=readmaprotel
 ORIGIN_DB_PASSWORD=M4pr0t3l
  
-# ORIGIN_DB_HOST=10.30.4.50
+# ORIGIN_DB_HOST=10.10.4.8
 # ORIGIN_DB_HOST=172.20.0.234
 # ------------------------------------------------------------------------
 
@@ -54,15 +54,15 @@ ORIGIN_CALLCENTER_DB=call_center
 # RECORDING PATH
 ## MAIN PATH
 ORIGIN_RECORDING_PATH=/var/spool/asterisk/monitor
-ORIGIN_QUEUE_JSON=http://172.20.0.234/proser/bk_TS/src/public/realtime/realtime.json
+ORIGIN_QUEUE_JSON=http://10.10.4.8/proser/bk_TS/src/public/realtime/realtime.json
 DESTINY_FILE_PATH=/var/www/html/proser_reports/src/public/audio/
 
 
 # SMS PATH
 DESTINY_FILE_PATH_SMS_LOCAL=/var/www/html/proser_reports/proser-backend/src/public/sms/
 DESTINY_FILE_PATH_SMS_EXTERNAL=/var/www/html/proser_reports/proser-backend/src/public/sms/
-DESTINY_FILE_PATH_SMS_MOUNT=''
-#DESTINY_FILE_PATH_SMS_MOUNT='mount -t cifs //10.10.4.101/c$/share/ -o username=digitelsms,password=InversionesDRC.2017 /mnt/'
+# DESTINY_FILE_PATH_SMS_MOUNT=''
+DESTINY_FILE_PATH_SMS_MOUNT='mount -t cifs //10.10.4.101/c$/share/ -o username=digitelsms,password=InversionesDRC.2017 /mnt/'
 
 ## HAVE TO ADD TO TH PATH /YYYY/MM/DD/recordigfile
 ## SAMPLE /var/spool/asterisk/monitor/2019/05/09

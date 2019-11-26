@@ -20,10 +20,10 @@ export async function displayMonitorByIndicatorsHistoric ( userSelection ) {
     detail: []
   };
 
-  if ( userSelection.mode.name = 'Actual' ) {
-    userSelection.start_date = userSelection.current_date;
-    userSelection.end_date = userSelection.end_date;
-  }
+  // if ( userSelection.mode.name = 'Actual' ) {
+  //   userSelection.start_date = userSelection.current_date;
+  //   userSelection.end_date = userSelection.end_date;
+  // }
 
   /* DETAIL ********************************* */
   let queryDetail = `
@@ -199,7 +199,7 @@ ${dateAndTimeSqlQuery( userSelection, "callentry_datetime_entry_queue" ) }
 AND callentry_date is not null
 
 
-GROUP BY inv_queue_name
+GROUP BY inv_queue_name, start_date 
 
 
 -- ---------------------------------------------------------------

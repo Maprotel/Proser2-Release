@@ -310,9 +310,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 ng-connection-service
 MIT
 
-ng2-charts
-ISC
-
 ngx-bootstrap/collapse
 
 ngx-bootstrap/component-loader
@@ -591,6 +588,9 @@ END OF TERMS AND CONDITIONS
 
 
 undefined
+
+ng2-charts
+ISC
 
 regenerator-runtime
 MIT

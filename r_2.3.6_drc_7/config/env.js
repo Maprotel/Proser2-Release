@@ -1,6 +1,6 @@
 ( function ( window ) {
 
-  const host = 'http://10.30.4.56';
+  const host = 'http://10.10.4.7';
   const externalAssets = '/assets';
 
   window.__env = window.__env || {};
@@ -13,10 +13,10 @@
   window.__env.systemApiUrl = host + ":3152";
   window.__env.systemUser = host + ":3153";
 
-  window.__env.callcenterName = "DRC -Los Dos Caminos";
+  window.__env.callcenterName = "DRC -Los Cortijos";
   window.__env.callcenterSlogan = "Convertimos la Atención al Cliente en experiencias satisfactorias";
+  window.__env.callcenterSite = "https://www.inversionesdrc.com/";
   window.__env.callcenterLogo = externalAssets + "/img/logos_client/client-logo.png";
-  window.__env.callcenterSite = "https://www.maprotel.com/";
 
   // Projects
   window.__env.auditLink = host + '/proser_reports/dist/audit/'
