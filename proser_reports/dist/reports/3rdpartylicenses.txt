@@ -60,6 +60,9 @@ MIT
 @angular/forms
 MIT
 
+@angular/localize
+MIT
+
 @angular/material
 MIT
 The MIT License
@@ -84,26 +87,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-
-@angular/material/button
-
-@angular/material/card
-
-@angular/material/core
-
-@angular/material/expansion
-
-@angular/material/form-field
-
-@angular/material/paginator
-
-@angular/material/select
-
-@angular/material/slider
-
-@angular/material/table
-
-@angular/material/tooltip
 
 @angular/platform-browser
 MIT
@@ -222,7 +205,7 @@ MIT
 MIT
 (The MIT License)
 
-Copyright (c) 2016 Swimlane <info@swimlane.com>
+Copyright (c) 2019 Swimlane <info@swimlane.com>
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -401,15 +384,32 @@ ISC
 ngx-audio-player
 MIT
 
-ngx-bootstrap/collapse
+ngx-bootstrap
+MIT
+The MIT License (MIT)
 
-ngx-bootstrap/component-loader
+Copyright (c) 2015-2017 Valor Software
+Copyright (c) 2015-2017 Dmitriy Shekhovtsov<valorkin@gmail.com>
 
-ngx-bootstrap/dropdown
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-ngx-bootstrap/positioning
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-ngx-bootstrap/utils
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
 
 proser
 
@@ -960,7 +960,7 @@ zone.js
 MIT
 The MIT License
 
-Copyright (c) 2016-2018 Google, Inc.
+Copyright (c) 2010-2020 Google LLC. http://angular.io/license
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

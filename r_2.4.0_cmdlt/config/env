@@ -38,7 +38,7 @@ PROSER_INVENTORY_DATABASE=proser-inv-cmdlt_citas
 # ORIGIN DATABASE CONNECTION
 CONNECTION_LIMIT=10
 ORIGIN_DB_HOST=172.16.1.128
-ORIGIN_DB_USER=readmaprotel
+ORIGIN_DB_USER=test_maprotel
 ORIGIN_DB_PASSWORD=M4pr0t3l
  
 # ORIGIN_DB_HOST=10.30.4.50
@@ -55,7 +55,7 @@ ORIGIN_CALLCENTER_DB=call_center
 ## MAIN PATH
 ORIGIN_RECORDING_PATH=/var/spool/asterisk/monitor
 ORIGIN_QUEUE_JSON=http://172.20.0.234/proser/bk_TS/src/public/realtime/realtime.json
-DESTINY_FILE_PATH=/var/www/html/proser_reports/src/public/audio/
+DESTINY_FILE_PATH=/var/www/html/proser/proser_reports/src/public/audio/
 
 
 # SMS PATH

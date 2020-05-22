@@ -61,6 +61,7 @@ export async function operationConsolidateOperationReport(userSelection) {
       agent_id
   `;
 
+  
   try {
     let resultPre = await pool.destinyReports.query(query);
     result = resultPre;

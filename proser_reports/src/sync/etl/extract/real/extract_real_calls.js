@@ -5,7 +5,9 @@ import {
   previousDate,
   nextDate,
   minDate,
-  startDate
+  startDate,
+  deleteWriteDestiny,
+  deleteDestiny
 } from "./extract-functions-real";
 import moment from "moment";
 import { start } from "repl";
@@ -37,13 +39,13 @@ async function extractRealCalls(start_date) {
 
   console.log("records", preresult.length);
 
-  let erased = await deleteOtherDates(
-    start_date,
-    originTable,
-    originDateField
-  ).catch(err =>
-    console.log(`${destinyTable} caught it - deleteOtherDates`, err)
-  );
+  // let erased = await deleteOtherDates(
+  //   start_date,
+  //   originTable,
+  //   originDateField
+  // ).catch(err =>
+  //   console.log(`${destinyTable} caught it - deleteOtherDates`, err)
+  // );
 
   result = removeRowDataPacket(preresult);
 
@@ -54,41 +56,22 @@ async function extractRealCalls(start_date) {
     let extendedResult = "";
 
     if (Array.isArray(result) && result.length > 0) {
-      extendedResult = result
-        .map(x => {
-          // x.rca_logged_id = x.id;
-          // x.rca_logged_agent_id = x.id_agent;
-          // x.rca_break_id = x.id_break;
-          // x.rca_break_datetime_init = x.datetime_init;
-          // x.rca_break_datetime_end = x.datetime_end;
-          // x.rca_break_duration = x.duration;
-
-          return x;
-        })
-        .map(y => {
-          delete y.id;
-
-          delete y.id_agent;
-          delete y.id_break;
-          delete y.datetime_init;
-          delete y.datetime_end;
-          delete y.duration;
-          delete y.ext_parked;
-          delete y.rca_logged_id;
-          delete y.rcc_date;
-
-          return y;
-        });
-
+      extendedResult = result;
+      // console.log(extendedResult, "extendedResult");
       written;
       msg = "extractRealCalls end";
       validation = extendedResult[0] ? true : false;
 
       validation === true
-        ? (written = await writeDestiny(extendedResult, destinyTable).catch(
-          err => console.log("extractRealCalls caught it - writeDestiny", err)
+        ? (written = await deleteWriteDestiny(
+          extendedResult,
+          destinyTable
+        ).catch(err =>
+          console.log("extractRealCalls caught it - deleteWriteDestiny", err)
         ))
         : (msg = `No hay registros nuevos por actualizar en ${destinyTable}`);
+    } else {
+      await deleteDestiny(destinyTable);
     }
     return msg;
   } catch (e) {
@@ -98,70 +81,58 @@ async function extractRealCalls(start_date) {
 }
 
 // Read actual records
-async function deleteOtherDates(start_date, destinyTable, destinyDateField) {
-  let today = moment().format("YYYY-MM-DD");
+// async function deleteOtherDates(start_date, destinyTable, destinyDateField) {
+//   let today = moment().format("YYYY-MM-DD");
 
-  return new Promise((resolve, reject) => {
-    let querySQL = `
-    DELETE FROM RealCurrentCalls WHERE rcc_date <> '${start_date}';
-    DELETE FROM RealCurrentCalls WHERE rcc_callentry_datetime_end is not null;
+//   return new Promise((resolve, reject) => {
+//     let querySQL = `
+//     DELETE FROM RealCurrentCalls WHERE rcc_date <> '${start_date}';
+//     DELETE FROM RealCurrentCalls WHERE rcc_callentry_datetime_end is not null;
 
-    `;
-    resolve(pool.destinyReports.query(querySQL));
-    reject(`Error`);
-  });
-}
+//     `;
+//     resolve(pool.destinyReports.query(querySQL));
+//     reject(`Error`);
+//   });
+// }
 
 // Read actual records
 async function readOrigin(start_date, table, datefield) {
   let next_date = nextDate(start_date);
   return new Promise((resolve, reject) => {
     let querySQL = `
-    SELECT
+   SELECT
+    id as rcc_callentry_id
+    ,id_agent as rcc_callentry_agent_id
+    ,id_queue_call_entry as rcc_callentry_queue_id
+    ,id_contact as rcc_callentry_contact_id
+    ,callerid as rcc_callentry_callerid
+    ,DATE_FORMAT(datetime_init,'%Y-%m-%d %H:%i:%s') as rcc_callentry_datetime_init
+    ,DATE_FORMAT(datetime_end,'%Y-%m-%d %H:%i:%s') as rcc_callentry_datetime_end
+    ,duration as rcc_callentry_duration_sec
+    ,status as rcc_callentry_status
+    ,transfer as rcc_callentry_transfer
+    ,DATE_FORMAT(datetime_entry_queue,'%Y-%m-%d %H:%i:%s') as rcc_callentry_datetime_entry_queue
+    ,duration_wait as rcc_callentry_duration_wait_sec
+    ,uniqueid as rcc_callentry_uniqueid
+    ,id_campaign as rcc_callentry_campaign_id
+    ,trunk as rcc_callentry_trunk
+    ,DATE_FORMAT(datetime_entry_queue,'%Y-%m-%d %H:%i:%s') as rcc_date
 
-    callentry_id AS rcc_callentry_id
+    FROM call_center.call_entry
 
-    ,callentry_agent_id AS rcc_callentry_agent_id
-    ,callentry_queue_id AS rcc_callentry_queue_id
-    ,callentry_contact_id AS rcc_callentry_contact_id
-    ,callentry_callerid AS rcc_callentry_callerid
+    WHERE DATE(datetime_entry_queue) = '${start_date}'
+    AND (status = 'en-cola' OR status = 'activa')
 
-    ,DATE_FORMAT(callentry_datetime_init,'%Y-%m-%d %H:%i:%s') as rcc_callentry_datetime_init
-    ,DATE_FORMAT(callentry_datetime_end,'%Y-%m-%d %H:%i:%s') as rcc_callentry_datetime_end
-
-    ,callentry_duration_sec AS rcc_callentry_duration_sec
-    ,callentry_status AS rcc_callentry_status
-    ,callentry_transfer AS rcc_callentry_transfer
-
-    ,DATE_FORMAT(callentry_datetime_entry_queue,'%Y-%m-%d %H:%i:%s') as rcc_callentry_datetime_entry_queue
-
-    ,callentry_duration_sec_wait AS rcc_callentry_duration_wait_sec
-    ,callentry_uniqueid AS rcc_callentry_uniqueid
-    ,callentry_campaign_id AS rcc_callentry_campaign_id
-    ,callentry_trunk AS rcc_callentry_trunk
-
-    ,DATE_FORMAT(callentry_date,'%Y-%m-%d %H:%i:%s') as rcc_date
-
-
-    FROM
-    MainCallEntry
-
-    WHERE
-    callentry_date = '${start_date}'
-    AND
-    (callentry_status = 'activa' OR callentry_status = 'en-cola')
-    AND
-    callentry_datetime_end is null
 
     `;
-    resolve(pool.destinyReports.query(querySQL));
+    resolve(pool.origin.query(querySQL));
     reject(`Error`);
   });
 }
 
 /************************************************************************ */
 
-// npx babel-node src/sync/etl/extract/real/extract_realcalls.js
+// npx babel-node src/sync/etl/extract/real/extract_real_calls.js
 // extractRealCalls(incoming_date);
 
 module.exports = {

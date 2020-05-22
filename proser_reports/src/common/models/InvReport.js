@@ -21,12 +21,13 @@ import * as callsAutomaticDaily from "../queries/InvReport/calls/callsAutomaticD
 import * as callsAutomaticByIntervalDaily from "../queries/InvReport/calls/callsAutomaticDailyByInterval";
 import * as callsWaitTime from "../queries/InvReport/calls/callsWaitTime";
 import * as callsIndicatorsByInterval from "../queries/InvReport/calls/callsIndicatorsByInterval";
+import * as callsIndicatorsByQueue from "../queries/InvReport/calls/callsIndicatorsByQueue";
 
 import * as callsAbandoned from "../queries/InvReport/calls/callsAbandoned";
 
 import * as operationDetailOperation from "../queries/InvReport/operation/operationDetailOperation";
 import * as operationConsolidateOperation from "../queries/InvReport/operation/operationConsolidateOperation";
-import * as operationProductivity from "../queries/InvReport/operation/operationProductivity";
+import * as operationResume from "../queries/InvReport/operation/operationResume";
 import * as multipleQueries from "../queries/InvReport/operation/multipleQueries";
 
 import * as callsRecordingFile from "../queries/InvReport/calls/callsRecordingFile";
@@ -235,6 +236,26 @@ module.exports = function ( InvReport ) {
     description: [ "Returns values of inbound daily by interval report" ]
   } );
 
+
+  //**********************REMOTE METHOD INBOUND DAILY BY QUEUE REPORT**********************/
+
+  InvReport.callsInboundDailyByQueueReport = async function ( userSelection ) {
+    return callsInboundDailyByQueue.callsInboundDailyByQueueReport(
+      userSelection
+    );
+  };
+  
+  InvReport.remoteMethod( "callsInboundDailyByQueueReport", {
+    accepts: {
+      arg: "userSelection",
+      type: "UserSelection",
+      http: { source: "body" }
+    },
+    returns: { type: "array", root: "true" },
+    description: [ "Returns values of inbound daily by queue report" ]
+  } );
+
+    
   //**********************REMOTE METHOD OUTBOUND DAILY REPORT**********************/
 
   InvReport.callsOutboundDailyReport = async function ( userSelection ) {
@@ -353,6 +374,22 @@ module.exports = function ( InvReport ) {
     description: [ "Returns values of calls indicators by interval" ]
   } );
 
+  //**********************REMOTE METHOD CALLS INDICATORS BY QUEUE**********************/
+
+  InvReport.callsIndicatorsByQueueReport = async function ( userSelection ) {
+    return callsIndicatorsByQueue.callsIndicatorsByQueueReport( userSelection );
+  };
+
+  InvReport.remoteMethod( "callsIndicatorsByQueueReport", {
+    accepts: {
+      arg: "userSelection",
+      type: "UserSelection",
+      http: { source: "body" }
+    },
+    returns: { type: "array", root: "true" },
+    description: [ "Returns values of calls indicators by queue" ]
+  } );
+
   //*****************************OPERATION REPORT*******************************/
   //************************************************************************/
 
@@ -393,20 +430,20 @@ module.exports = function ( InvReport ) {
     description: [ "Returns values of detail operation report" ]
   } );
 
-  //**********************REMOTE METHOD PRODUCTIVITY REPORT**********************/
+  //**********************REMOTE METHOD RESUME REPORT**********************/
 
-  InvReport.operationProductivityReport = async function ( userSelection ) {
-    return operationProductivity.operationProductivityReport( userSelection );
+  InvReport.operationResumeReport = async function ( userSelection ) {
+    return operationResume.operationResumeReport( userSelection );
   };
 
-  InvReport.remoteMethod( "operationProductivityReport", {
+  InvReport.remoteMethod( "operationResumeReport", {
     accepts: {
       arg: "userSelection",
       type: "UserSelection",
       http: { source: "body" }
     },
     returns: { type: "array", root: "true" },
-    description: [ "Returns values of productivity report" ]
+    description: [ "Returns values of Resume report" ]
   } );
 
   //***************************INBOUND GROUP REPORT - REMOTE METHOD*********************************/
@@ -506,8 +543,8 @@ module.exports = function ( InvReport ) {
 
   //**********************EXTRACT RECORDING FILE**********************/
 
-  InvReport.callsGetRecordingFile = async function ( userSelection ) {
-    return callsRecordingFile.callsGetRecordingFile( userSelection );
+  InvReport.callsGetRecordingFile = async function ( RecordSelection ) {
+    return callsRecordingFile.callsGetRecordingFile( RecordSelection );
   };
 
   InvReport.remoteMethod( "callsGetRecordingFile", {
@@ -522,8 +559,8 @@ module.exports = function ( InvReport ) {
 
   //**********************DELETE RECORDING FILE**********************/
 
-  InvReport.deleteRecordingFile = async function ( userSelection ) {
-    return callsRecordingFile.deleteRecordingFile( userSelection );
+  InvReport.deleteRecordingFile = async function ( RecordSelection ) {
+    return callsRecordingFile.deleteRecordingFile( RecordSelection );
   };
 
   InvReport.remoteMethod( "deleteRecordingFile", {

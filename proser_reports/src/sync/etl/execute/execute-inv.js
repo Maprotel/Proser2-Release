@@ -21,7 +21,7 @@ import { updateHcaQueue } from "../update/hca/update_hca_queue";
 // import { transformHcaAgent } from "../transform/hca/hca-agent/transform_hca_agent";
 
 
-let input_date = process.argv[ 2 ]
+let input_date = process.argv[ 2 ];
 let incoming_date = input_date === '' ? '' : process.argv[ 2 ];
 
 const chalk = require( "chalk" );
@@ -115,7 +115,7 @@ async function executeAllInv () {
 /************************************************************************ */
 
 // npx babel-node src/sync/etl/execute/execute_inv.js
-executeAllInv();
+// executeAllInv();
 
 module.exports = {
   executeAllInv
